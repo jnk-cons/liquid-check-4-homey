@@ -1,0 +1,22 @@
+[X] - Icons
+  [X] - Capabilities
+  [X] - Device
+  [X] - Store Images
+  [X] - Store Device Image
+[X] - Karten
+  [X] - Tankinhalt geändert
+    [X] - Definition
+    [X] - Implementiert
+  [X] - Tankinhalt vermehrt
+    [X] - Definition
+    [X] - Implementiert
+  [X] - Tankinhalt verringert
+    [X] - Definition
+    [X] - Implementiert
+  [X] - Messung auslösen
+    [X] - Definition
+    [X] - Implementiert
+[X] - Passwortschutz
+[X] - MIT License
+[X] - Readme
+[ ] - Git repo

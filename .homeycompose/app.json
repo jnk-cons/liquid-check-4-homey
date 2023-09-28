@@ -1,0 +1,39 @@
+{
+  "id": "de.jnkconsulting.smart.liquidcheck",
+  "version": "1.0.0",
+  "compatibility": ">=5.0.0",
+  "sdk": 3,
+  "platforms": [
+    "local"
+  ],
+  "name": {
+    "en": "Liquid-Check"
+  },
+  "description": {
+    "en": "Adds support for Liquid-Check devices"
+  },
+  "category": [
+    "appliances"
+  ],
+  "permissions": [],
+  "images": {
+    "small": "/assets/images/small.png",
+    "large": "/assets/images/large.png",
+    "xlarge": "/assets/images/xlarge.png"
+  },
+  "author": {
+    "name": "Jochen Zink"
+  },
+  "bugs": {
+    "url": "https://github.com/jnk-cons/liquid-check-4-homey/issues"
+  },
+  "source": "https://github.com/jnk-cons/liquid-check-4-homey",
+  "support": "mailto:jochen.zink@jnk-consulting.de",
+  "contributing": {
+    "donate": {
+      "paypal": {
+        "username": "jochenzink84"
+      }
+    }
+  }
+}

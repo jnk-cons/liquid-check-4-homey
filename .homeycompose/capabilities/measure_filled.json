@@ -1,0 +1,16 @@
+{
+  "type": "number",
+  "title": {
+    "en": "Filling level",
+    "de": "Füllgrad"
+  },
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "units": {
+    "en": "%",
+    "de": "%"
+  },
+  "icon": "/assets/images/percentage.svg",
+  "insights": true
+}

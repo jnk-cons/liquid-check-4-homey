@@ -1,0 +1,322 @@
+{
+  "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
+  "id": "de.jnkconsulting.smart.liquidcheck",
+  "version": "1.0.0",
+  "compatibility": ">=5.0.0",
+  "sdk": 3,
+  "platforms": [
+    "local"
+  ],
+  "name": {
+    "en": "Liquid-Check"
+  },
+  "description": {
+    "en": "Adds support for Liquid-Check devices"
+  },
+  "category": [
+    "appliances"
+  ],
+  "permissions": [],
+  "images": {
+    "small": "/assets/images/small.png",
+    "large": "/assets/images/large.png",
+    "xlarge": "/assets/images/xlarge.png"
+  },
+  "author": {
+    "name": "Jochen Zink"
+  },
+  "contributing": {
+    "donate": {
+      "paypal": {
+        "username": "jochenzink84"
+      }
+    }
+  },
+  "flow": {
+    "triggers": [
+      {
+        "id": "tank_level_has_changed",
+        "title": {
+          "en": "Tank content changed",
+          "de": "Tankinhalt verändert"
+        },
+        "tokens": [
+          {
+            "name": "old level",
+            "type": "number",
+            "title": {
+              "en": "Last measured value in liters, before the change",
+              "de": "Letzter gemessener Wert in Litern, vor der Änderung"
+            }
+          },
+          {
+            "name": "new level",
+            "type": "number",
+            "title": {
+              "en": "Current measured value in liters",
+              "de": "Aktuell gemessener Wert in Litern"
+            }
+          },
+          {
+            "name": "level change",
+            "type": "number",
+            "title": {
+              "en": "Difference new/old value in liters",
+              "de": "Unterschied neuer/alter Wert in Litern"
+            }
+          }
+        ],
+        "hint": {
+          "en": "Is triggered as soon as the tank content has changed compared to the last measurement",
+          "de": "Wird ausgelöst, sobald sich der Tankinhalt gegenüber der letzten Messung verändert hat"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=liquid-check"
+          }
+        ]
+      },
+      {
+        "id": "tank_level_increased",
+        "title": {
+          "en": "Tank content increased",
+          "de": "Tankinhalt vermehrt"
+        },
+        "tokens": [
+          {
+            "name": "old level",
+            "type": "number",
+            "title": {
+              "en": "Last measured value in liters, before the change",
+              "de": "Letzter gemessener Wert in Litern, vor der Änderung"
+            }
+          },
+          {
+            "name": "new level",
+            "type": "number",
+            "title": {
+              "en": "Current measured value in liters",
+              "de": "Aktuell gemessener Wert in Litern"
+            }
+          },
+          {
+            "name": "level change",
+            "type": "number",
+            "title": {
+              "en": "Difference new/old value in liters",
+              "de": "Unterschied neuer/alter Wert in Litern"
+            }
+          }
+        ],
+        "hint": {
+          "en": "Is triggered as soon as the tank content has increased compared to the last measurement",
+          "de": "Wird ausgelöst, sobald sich der Tankinhalt gegenüber der letzten Messung vermehrt hat"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=liquid-check"
+          }
+        ]
+      },
+      {
+        "id": "tank_level_decreases",
+        "title": {
+          "en": "Tank content decreases",
+          "de": "Tankinhalt verringert"
+        },
+        "tokens": [
+          {
+            "name": "old level",
+            "type": "number",
+            "title": {
+              "en": "Last measured value in liters, before the change",
+              "de": "Letzter gemessener Wert in Litern, vor der Änderung"
+            }
+          },
+          {
+            "name": "new level",
+            "type": "number",
+            "title": {
+              "en": "Current measured value in liters",
+              "de": "Aktuell gemessener Wert in Litern"
+            }
+          },
+          {
+            "name": "level change",
+            "type": "number",
+            "title": {
+              "en": "Difference new/old value in liters",
+              "de": "Unterschied neuer/alter Wert in Litern"
+            }
+          }
+        ],
+        "hint": {
+          "en": "Triggered as soon as the tank content has decreased compared to the last measurement",
+          "de": "Wird ausgelöst, sobald sich der Tankinhalt gegenüber der letzten Messung verringert hat"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=liquid-check"
+          }
+        ]
+      }
+    ],
+    "actions": [
+      {
+        "id": "start_new_measurement",
+        "title": {
+          "en": "Starts a new measurement of the tank content",
+          "de": "Startet eine neue Messung des Tankinhalts"
+        },
+        "hint": {
+          "en": "Starts a new measurement of the tank content. The card does not wait for the result of the measurement.",
+          "de": "Startet eine neue Messung des Tankinhalts. Die Karte wartet nicht auf das Ergebnis der Messung."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=liquid-check"
+          }
+        ]
+      }
+    ]
+  },
+  "drivers": [
+    {
+      "name": {
+        "en": "Liquid-Check"
+      },
+      "class": "other",
+      "capabilities": [
+        "measure_liters",
+        "measure_filled",
+        "last_measurement"
+      ],
+      "platforms": [
+        "local"
+      ],
+      "connectivity": [
+        "lan"
+      ],
+      "images": {
+        "small": "/drivers/liquid-check/assets/images/small.png",
+        "large": "/drivers/liquid-check/assets/images/large.png",
+        "xlarge": "/drivers/liquid-check/assets/images/xlarge.png"
+      },
+      "pair": [
+        {
+          "id": "connect",
+          "navigation": {
+            "next": "list_my_devices"
+          }
+        },
+        {
+          "id": "list_my_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_my_devices",
+            "prev": "connect"
+          },
+          "options": {
+            "singular": true
+          }
+        },
+        {
+          "id": "add_my_devices",
+          "template": "add_devices"
+        }
+      ],
+      "id": "liquid-check",
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "Connection data",
+            "de": "Verbindungsdaten"
+          },
+          "children": [
+            {
+              "id": "url",
+              "type": "text",
+              "label": {
+                "en": "URL",
+                "de": "URL"
+              },
+              "value": "",
+              "hint": {
+                "en": "URL of the Liquid Check device",
+                "de": "URL des Liquid-Check Geräts"
+              }
+            },
+            {
+              "id": "password",
+              "type": "password",
+              "label": {
+                "en": "Password (optional)",
+                "de": "Passwort (optional)"
+              },
+              "value": "",
+              "hint": {
+                "en": "Password of Liquid-Check, if the protection is activated there",
+                "de": "Passwort von Liquid-Check, falls der Schutz dort aktiviert ist"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "capabilities": {
+    "last_measurement": {
+      "type": "string",
+      "title": {
+        "en": "Last measurement before",
+        "de": "Letzte Messung vor"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/images/calendar.svg",
+      "insights": false
+    },
+    "measure_filled": {
+      "type": "number",
+      "title": {
+        "en": "Filling level",
+        "de": "Füllgrad"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "units": {
+        "en": "%",
+        "de": "%"
+      },
+      "icon": "/assets/images/percentage.svg",
+      "insights": true
+    },
+    "measure_liters": {
+      "type": "number",
+      "title": {
+        "en": "Tank level",
+        "de": "Tankinhalt"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "units": {
+        "en": "l",
+        "de": "l"
+      },
+      "icon": "/assets/images/water.svg",
+      "insights": true
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "setup": {
+    "main": "Liquid Check",
+    "title": "Verbindungsdaten",
+    "name": "Devicename",
+    "url": "Geräte URL",
+    "url-hint": "URL des Liquid Check Gerätes",
+    "validation": {
+      "required": "Das Feld __input__ muss ausgefüllt werden"
+    },
+    "connection-test": {
+      "success": "Erfolgreich",
+      "failed": "Nicht erfolgreich",
+      "failed-detail": "Nicht erfolgreich: __detail__",
+      "failed-unreachable-host": "Server nicht gefunden"
+    }
+  },
+  "please-wait": "Bitte warten"
+}

@@ -1,0 +1,128 @@
+{
+  "actions": [
+    {
+      "id": "start_new_measurement",
+      "title": {
+        "en": "Measure tank level",
+        "de": "Tankinhalt messen"
+      },
+      "hint": {
+        "en": "Starts a new measurement of the tank content. The card does not wait for the result of the measurement.",
+        "de": "Startet eine neue Messung des Tankinhalts. Die Karte wartet nicht auf das Ergebnis der Messung."
+      }
+    }
+  ],
+  "triggers": [
+    {
+      "id": "tank_level_has_changed",
+      "title": {
+        "en": "Tank content changed",
+        "de": "Tankinhalt verändert"
+      },
+      "tokens": [
+        {
+          "name": "old level",
+          "type": "number",
+          "title": {
+            "en": "Last measured value in liters, before the change",
+            "de": "Letzter gemessener Wert in Litern, vor der Änderung"
+          }
+        },
+        {
+          "name": "new level",
+          "type": "number",
+          "title": {
+            "en": "Current measured value in liters",
+            "de": "Aktuell gemessener Wert in Litern"
+          }
+        },
+        {
+          "name": "level change",
+          "type": "number",
+          "title": {
+            "en": "Difference new/old value in liters",
+            "de": "Unterschied neuer/alter Wert in Litern"
+          }
+        }
+      ],
+      "hint": {
+        "en": "Is triggered as soon as the tank content has changed compared to the last measurement",
+        "de": "Wird ausgelöst, sobald sich der Tankinhalt gegenüber der letzten Messung verändert hat"
+      }
+    },
+    {
+      "id": "tank_level_increased",
+      "title": {
+        "en": "Tank content increased",
+        "de": "Tankinhalt vermehrt"
+      },
+      "tokens": [
+        {
+          "name": "old level",
+          "type": "number",
+          "title": {
+            "en": "Last measured value in liters, before the change",
+            "de": "Letzter gemessener Wert in Litern, vor der Änderung"
+          }
+        },
+        {
+          "name": "new level",
+          "type": "number",
+          "title": {
+            "en": "Current measured value in liters",
+            "de": "Aktuell gemessener Wert in Litern"
+          }
+        },
+        {
+          "name": "level change",
+          "type": "number",
+          "title": {
+            "en": "Difference new/old value in liters",
+            "de": "Unterschied neuer/alter Wert in Litern"
+          }
+        }
+      ],
+      "hint": {
+        "en": "Is triggered as soon as the tank content has increased compared to the last measurement",
+        "de": "Wird ausgelöst, sobald sich der Tankinhalt gegenüber der letzten Messung vermehrt hat"
+      }
+    },
+    {
+      "id": "tank_level_decreases",
+      "title": {
+        "en": "Tank content decreases",
+        "de": "Tankinhalt verringert"
+      },
+      "tokens": [
+        {
+          "name": "old level",
+          "type": "number",
+          "title": {
+            "en": "Last measured value in liters, before the change",
+            "de": "Letzter gemessener Wert in Litern, vor der Änderung"
+          }
+        },
+        {
+          "name": "new level",
+          "type": "number",
+          "title": {
+            "en": "Current measured value in liters",
+            "de": "Aktuell gemessener Wert in Litern"
+          }
+        },
+        {
+          "name": "level change",
+          "type": "number",
+          "title": {
+            "en": "Difference new/old value in liters",
+            "de": "Unterschied neuer/alter Wert in Litern"
+          }
+        }
+      ],
+      "hint": {
+        "en": "Triggered as soon as the tank content has decreased compared to the last measurement",
+        "de": "Wird ausgelöst, sobald sich der Tankinhalt gegenüber der letzten Messung verringert hat"
+      }
+    }
+  ]
+}

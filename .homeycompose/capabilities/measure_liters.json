@@ -1,0 +1,16 @@
+{
+  "type": "number",
+  "title": {
+    "en": "Tank level",
+    "de": "Tankinhalt"
+  },
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "units": {
+    "en": "l",
+    "de": "l"
+  },
+  "icon": "/assets/images/water.svg",
+  "insights": true
+}

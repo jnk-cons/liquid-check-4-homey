@@ -1,0 +1,24 @@
+[
+  {
+    "type": "group",
+    "label": {
+      "en": "Connection data",
+      "de": "Verbindungsdaten"
+    },
+    "children": [
+      {
+        "id": "url",
+        "type": "text",
+        "label": {
+          "en": "URL",
+          "de": "URL"
+        },
+        "value": "",
+        "hint": {
+          "en": "URL of the Liquid Check device",
+          "de": "URL des Liquid-Check Geräts"
+        }
+      }
+    ]
+  }
+]

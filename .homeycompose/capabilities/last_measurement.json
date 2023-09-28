@@ -1,0 +1,12 @@
+{
+  "type": "string",
+  "title": {
+    "en": "Last measurement before",
+    "de": "Letzte Messung vor"
+  },
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "icon": "/assets/images/calendar.svg",
+  "insights": false
+}
