@@ -22,41 +22,51 @@ export interface DeviceDto {
 
 export class LiquidCheckApi {
 
-    constructor(private config: ServerConfig) { }
+    constructor(private config: ServerConfig,
+                private log: (...args: any[]) => void,) { }
 
     requestInfos(): Promise<InfosDto> {
         const result = new Promise<InfosDto>( async (resolve, reject) => {
-            const infoResponse = await this.executeRequest('infos.json', 'get')
-            if (infoResponse.ok) {
-                const bodyAsJson = await infoResponse.json()
-                const parsed: InfosDto = {
-                    measure: {
-                        age: bodyAsJson['payload']['measure']['age'],
-                        content: bodyAsJson['payload']['measure']['content'],
-                        level: bodyAsJson['payload']['measure']['level'],
-                        percent: bodyAsJson['payload']['measure']['percent'],
-                    },
-                    device: {
-                        firmware: bodyAsJson['payload']['device']['firmware'],
-                        uuid: bodyAsJson['payload']['device']['uuid'],
-                        hardware: bodyAsJson['payload']['device']['hardware'],
+            this.executeRequest('infos.json', 'get')
+                .then(async response => {
+                    if (response.ok) {
+                        const bodyAsJson = await response.json()
+                        const parsed: InfosDto = {
+                            measure: {
+                                age: bodyAsJson['payload']['measure']['age'],
+                                content: bodyAsJson['payload']['measure']['content'],
+                                level: bodyAsJson['payload']['measure']['level'],
+                                percent: bodyAsJson['payload']['measure']['percent'],
+                            },
+                            device: {
+                                firmware: bodyAsJson['payload']['device']['firmware'],
+                                uuid: bodyAsJson['payload']['device']['uuid'],
+                                hardware: bodyAsJson['payload']['device']['hardware'],
+                            }
+                        }
+                        resolve(parsed)
+                    } else {
+                        reject({
+                            code: response.status,
+                            msg: response.statusText
+                        })
                     }
-                }
-                resolve(parsed)
-            }
-            else {
-                reject({
-                    code: infoResponse.status,
-                    msg: infoResponse.statusText
                 })
-            }
+                .catch(e => {
+                    this.log('Error executing request for endpoint /infos.json', e)
+                    reject({
+                        code: -1,
+                        msg: e.toString()
+                    })
+                })
+
+
         })
         return result
     }
 
     requestMeasure(): Promise<void> {
         const result = new Promise<void>( async (resolve, reject) => {
-            // {"header":{"namespace":"Device.Control","name":"StartMeasure","messageId":"1","payloadVersion":"1"},"payload":null}
             const measureBody = {
                 'header': {
                     'namespace': 'Device.Control',
@@ -66,16 +76,25 @@ export class LiquidCheckApi {
                 },
                 'payload': null
             }
-            const infoResponse = await this.executeRequest('command', 'post', JSON.stringify(measureBody))
-            if (infoResponse.ok) {
-                resolve()
-            }
-            else {
-                reject({
-                    code: infoResponse.status,
-                    msg: infoResponse.statusText
+            this.executeRequest('command', 'post', JSON.stringify(measureBody))
+                .then(response => {
+                    if (response.ok) {
+                        resolve()
+                    }
+                    else {
+                        reject({
+                            code: response.status,
+                            msg: response.statusText
+                        })
+                    }
                 })
-            }
+                .catch(e => {
+                    this.log('Error executing request for endpoint /command', e)
+                    reject({
+                        code: -1,
+                        msg: e.toString()
+                    })
+                })
         })
         return result
     }

@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "compatibility": ">=5.0.0",
   "sdk": 3,
+  "brandColor": "#000000",
   "platforms": [
     "local"
   ],
@@ -25,6 +26,11 @@
   "author": {
     "name": "Jochen Zink"
   },
+  "bugs": {
+    "url": "https://github.com/jnk-cons/liquid-check-4-homey/issues"
+  },
+  "source": "https://github.com/jnk-cons/liquid-check-4-homey",
+  "support": "mailto:jochen.zink@jnk-consulting.de",
   "contributing": {
     "donate": {
       "paypal": {
@@ -171,8 +177,8 @@
       {
         "id": "start_new_measurement",
         "title": {
-          "en": "Starts a new measurement of the tank content",
-          "de": "Startet eine neue Messung des Tankinhalts"
+          "en": "Measure tank level",
+          "de": "Tankinhalt messen"
         },
         "hint": {
           "en": "Starts a new measurement of the tank content. The card does not wait for the result of the measurement.",
@@ -253,19 +259,6 @@
               "hint": {
                 "en": "URL of the Liquid Check device",
                 "de": "URL des Liquid-Check Geräts"
-              }
-            },
-            {
-              "id": "password",
-              "type": "password",
-              "label": {
-                "en": "Password (optional)",
-                "de": "Passwort (optional)"
-              },
-              "value": "",
-              "hint": {
-                "en": "Password of Liquid-Check, if the protection is activated there",
-                "de": "Passwort von Liquid-Check, falls der Schutz dort aktiviert ist"
               }
             }
           ]

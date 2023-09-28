@@ -7,8 +7,7 @@ class LiquidCheckDriver extends Homey.Driver {
 
   private settings: ServerConfig = {
     name: '',
-    //url: 'http://liquid-check'
-    url: 'http://192.168.178.144'
+    url: 'http://liquid-check'
   }
 
 
@@ -52,7 +51,7 @@ class LiquidCheckDriver extends Homey.Driver {
     if (validationError) {
       return validationError
     }
-    const api = new LiquidCheckApi(data)
+    const api = new LiquidCheckApi(data, this.log)
     try {
       await api.requestInfos()
       return this.homey.__('setup.connection-test.success');

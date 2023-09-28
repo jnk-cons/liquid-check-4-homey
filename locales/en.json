@@ -1,1 +1,19 @@
-{}
+{
+  "setup": {
+    "main": "Liquid-Check",
+    "title": "Connection data",
+    "name": "Devicename",
+    "url": "Device URL",
+    "url-hint": "URL of the Liquid-Check device",
+    "validation": {
+      "required": "The __input__ field must be filled in"
+    },
+    "connection-test": {
+      "success": "Successful",
+      "failed": "Not successful",
+      "failed-detail": "Not successful: __detail__",
+      "failed-unreachable-host": "Server not found"
+    }
+  },
+  "please-wait": "Please wait"
+}

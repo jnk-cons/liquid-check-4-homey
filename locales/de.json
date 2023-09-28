@@ -1,10 +1,10 @@
 {
   "setup": {
-    "main": "Liquid Check",
+    "main": "Liquid-Check",
     "title": "Verbindungsdaten",
     "name": "Devicename",
     "url": "Geräte URL",
-    "url-hint": "URL des Liquid Check Gerätes",
+    "url-hint": "URL des Liquid-Check Gerätes",
     "validation": {
       "required": "Das Feld __input__ muss ausgefüllt werden"
     },

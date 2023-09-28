@@ -2,7 +2,7 @@ import Homey, {FlowCardTriggerDevice} from 'homey';
 import {ServerConfig} from '../../src/model/server.config';
 import {LiquidCheckApi} from '../../src/api';
 
-const SYNC_INTERVAL = 1000 * 60 * 2; // 2 min
+const SYNC_INTERVAL = 1000 * 60 * 1; // 2 min
 
 class LiquidCheckDevice extends Homey.Device {
 
@@ -18,7 +18,7 @@ class LiquidCheckDevice extends Homey.Device {
     const meassureCard = this.homey.flow.getActionCard('start_new_measurement');
     meassureCard.registerRunListener(async (args, state) => {
       const device: LiquidCheckDevice = args.device;
-      const api = new LiquidCheckApi(device.getSettings());
+      const api = new LiquidCheckApi(device.getSettings(), device.log);
       device.log("Executing start measure command")
       try {
         await api.requestMeasure();
@@ -55,50 +55,54 @@ class LiquidCheckDevice extends Homey.Device {
 
   async sync() {
     this.log('Start sync ...')
-    const config: ServerConfig = this.getSettings()
-    const api = new LiquidCheckApi(config)
-    const result = await api.requestInfos()
-    let oldLevel: number | undefined = this.getCapabilityValue('measure_liters')
-    this.log(oldLevel)
-    if (oldLevel === undefined || oldLevel == null) {
-      oldLevel = 0
-    }
-    const newLevel = result.measure.content
+    try {
+      let config: ServerConfig = this.getSettings()
 
-    this.updateCapability('measure_liters', newLevel)
-    this.updateCapability('measure_filled', result.measure.percent)
-    const lastMeasurementSeconds = result.measure.age
-    const hours = Math.floor(lastMeasurementSeconds / 3600)
-    const remainingSeconds = lastMeasurementSeconds % 3600
-    const minutes = Math.floor(remainingSeconds / 60)
-
-    let measureTime = `${hours}:`
-    if (hours < 10) {
-      measureTime = `0${measureTime}`
-    }
-    if (minutes < 10) {
-      measureTime += "0"
-    }
-    measureTime += `${minutes}`
-
-    this.updateCapability('last_measurement', measureTime)
-
-    if (oldLevel != newLevel) {
-      const token = {
-        'old level': oldLevel,
-        'new level': newLevel,
-        'level change': newLevel - oldLevel
+      const api = new LiquidCheckApi(config, this.log)
+      const result = await api.requestInfos()
+      let oldLevel: number | undefined = this.getCapabilityValue('measure_liters')
+      if (oldLevel === undefined || oldLevel == null) {
+        oldLevel = 0
       }
-      this.levelChangedCard?.trigger(this, token).then(this.log).catch(this.error)
-      if (oldLevel > newLevel) {
-        this.levelDecreasesCard?.trigger(this, token).then(this.log).catch(this.error)
+      const newLevel = result.measure.content
+
+      this.updateCapability('measure_liters', newLevel)
+      this.updateCapability('measure_filled', result.measure.percent)
+      const lastMeasurementSeconds = result.measure.age
+      const hours = Math.floor(lastMeasurementSeconds / 3600)
+      const remainingSeconds = lastMeasurementSeconds % 3600
+      const minutes = Math.floor(remainingSeconds / 60)
+
+      let measureTime = `${hours}:`
+      if (hours < 10) {
+        measureTime = `0${measureTime}`
       }
-      else if (oldLevel < newLevel) {
-        this.levelIncreasesCard?.trigger(this, token).then(this.log).catch(this.error)
+      if (minutes < 10) {
+        measureTime += "0"
       }
+      measureTime += `${minutes}`
+
+      this.updateCapability('last_measurement', measureTime)
+
+      if (oldLevel != newLevel) {
+        const token = {
+          'old level': oldLevel,
+          'new level': newLevel,
+          'level change': newLevel - oldLevel
+        }
+        this.levelChangedCard?.trigger(this, token).then(this.log).catch(this.error)
+        if (oldLevel > newLevel) {
+          this.levelDecreasesCard?.trigger(this, token).then(this.log).catch(this.error)
+        } else if (oldLevel < newLevel) {
+          this.levelIncreasesCard?.trigger(this, token).then(this.log).catch(this.error)
+        }
+      }
+      this.log('Finished sync ...')
+    } catch (e) {
+      this.log('Finished sync with error...', e)
     }
 
-    this.log('Finished sync ...')
+
   }
 
   private updateCapability(id: string, newValue: any) {
@@ -129,7 +133,7 @@ class LiquidCheckDevice extends Homey.Device {
       password: newSettings.password
     }
     try {
-      await new LiquidCheckApi(newSettingsAsConfig).requestInfos()
+      await new LiquidCheckApi(newSettingsAsConfig, this.log).requestInfos()
     } catch (e) {
       throw e
     }
