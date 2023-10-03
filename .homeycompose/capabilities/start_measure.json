@@ -1,0 +1,12 @@
+{
+  "type": "boolean",
+  "title": {
+    "en": "New measurement",
+    "de": "Neue Messung"
+  },
+  "getable": true,
+  "setable": true,
+  "uiComponent": "toggle",
+  "uiQuickAction": false,
+  "icon": "/assets/images/water.svg"
+}

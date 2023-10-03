@@ -1,6 +1,6 @@
 {
   "id": "de.jnkconsulting.smart.liquidcheck",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "brandColor": "#000000",
@@ -11,7 +11,8 @@
     "en": "Liquid-Check"
   },
   "description": {
-    "en": "Adds support for Liquid-Check devices"
+    "en": "Measure fluid levels in unpressurised containers",
+    "de": "Messen von Flüssigkeitsständen in drucklosen Behältern"
   },
   "category": [
     "appliances"

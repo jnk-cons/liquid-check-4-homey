@@ -4,6 +4,7 @@
   },
   "class": "other",
   "capabilities": [
+    "start_measure",
     "measure_liters",
     "measure_filled",
     "last_measurement"

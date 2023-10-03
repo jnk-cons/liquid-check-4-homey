@@ -2,7 +2,7 @@ import Homey, {FlowCardTriggerDevice} from 'homey';
 import {ServerConfig} from '../../src/model/server.config';
 import {LiquidCheckApi} from '../../src/api';
 
-const SYNC_INTERVAL = 1000 * 60 * 1; // 2 min
+const SYNC_INTERVAL = 1000 * 60 * 1; // 1 min
 
 class LiquidCheckDevice extends Homey.Device {
 
@@ -31,6 +31,29 @@ class LiquidCheckDevice extends Homey.Device {
     });
 
     this.startAutoSync()
+
+    setTimeout(() => {
+      this.setCapabilityValue('start_measure', false).then()
+      this.registerCapabilityListener('start_measure', (value, opts) => {
+        this.log('Starting new measure')
+        if (value) {
+          const api = new LiquidCheckApi(this.getSettings(), this.log);
+          api.requestMeasure()
+              .then(() => {this.log("new measurement requested")})
+              .catch((e) => {this.error("new measurement requestfailed", e)})
+              .finally(() => {
+                this.resetMeasureButton()
+              })
+        }
+
+      })
+    }, 1000)
+  }
+
+  private resetMeasureButton() {
+    setTimeout(() => {
+      this.setCapabilityValue('start_measure', false).then()
+    }, 3000)
   }
 
   private startAutoSync() {

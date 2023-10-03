@@ -1,5 +1,8 @@
 {
   "1.0.0": {
     "en": "Initial release"
+  },
+  "1.1.0": {
+    "en": "#1) - A new measurement can be triggered by button click on the device"
   }
 }
